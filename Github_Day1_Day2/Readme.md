@@ -324,3 +324,54 @@ a1b2c3d (HEAD -> main) feat: Add resource group creation to deployment script
 
 git diff --- Working Directory vs Staging area
 git diff --staged --- Working Area vs Local Repository
+
+
+
+In real DevOps work, everyone eventually makes a typo, breaks a script, or stages the wrong file. Git provides simple, safe commands to step backward before those mistakes hit your local history or remote cloud repositories.
+
+Scenario A: Discarding Unstaged Local Changes (git restore)
+Imagine you are editing deploy.sh and accidentally type garbage code or delete important logic by mistake, but you have not run git add yet.
+
+Hands-on Step 1: Make a Bad Edit
+Open deploy.sh in VS Code.
+
+Add a broken third line at the bottom:
+
+
+echo "Deploying Azure Infrastructure..."
+echo "Creating Resource Group: rg-production-eastus"
+echo "BROKEN CODE: delete all resources"
+Save the file (Ctrl + S or Cmd + S).
+
+Run git status in your terminal—you'll see red modified: deploy.sh.
+
+Hands-on Step 2: Revert Back using git restore
+Instead of manually deleting the bad line in VS Code, let Git throw away your unstaged changes and restore the file to match your last commit:
+
+
+git restore deploy.sh
+What Happened?
+Look back at deploy.sh inside VS Code! The broken line is completely gone, and your file is back to its clean state. Run git status—your working tree is clean again!
+
+
+
+
+Scenario B: Unstaging a Staged File (git restore --staged)
+Now imagine you made an edit, ran git add deploy.sh, but realized you aren't ready to commit it yet. You want to pull the file back out of the Staging Area (shipping box) back onto your desk without losing your edits.
+
+Hands-on Step 3: Stage an Edit, Then Unstage It
+Open deploy.sh in VS Code and add a clean comment at the top:
+
+# Azure Deployment Script
+echo "Deploying Azure Infrastructure..."
+echo "Creating Resource Group: rg-production-eastus"
+Save the file and stage it:
+
+git add deploy.sh
+(Run git status—it shows green modified: deploy.sh in the Staging Area).
+
+Now unstage it using the --staged flag:
+
+git restore --staged deploy.sh
+What Happened?
+Run git status again. Notice the file is now back in red (Changes not staged for commit). Your edits were not deleted—the file was simply moved back from the Staging Area to your Working Directory!
