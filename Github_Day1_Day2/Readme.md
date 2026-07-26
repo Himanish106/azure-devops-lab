@@ -285,3 +285,42 @@ How to read a git diff:
 
 Real-World DevOps Context
 Imagine an engineer changes a subnet IP range or an Azure VM size in a script. Running git diff before committing lets you catch high-risk edits instantly before they ever touch production.
+
+
+
+Now that you've verified your changes using git diff, you are ready to take these new edits through our 3 Git areas again.
+
+Hands-on Step 4: Stage the Modification
+In your VS Code terminal, stage the updated file:
+
+git add deploy.sh
+Now, run git diff again:
+
+git diff
+Notice Something Interesting?
+git diff returned nothing! Why? Because by default, git diff compares your Working Directory to your Staging Area. Since you just staged deploy.sh, there are no unstaged differences left.
+
+Pro-Tip Command: git diff --staged
+To see what changes are sitting inside the Staging Area waiting to be committed, run:
+
+git diff --staged
+You will see your green added line (+echo "Creating Resource Group: rg-production-eastus") again!
+
+Hands-on Step 5: Commit the Second Snapshot
+Now seal this second snapshot into your Local Repository:
+
+git commit -m "feat: Add resource group creation to deployment script"
+Hands-on Step 6: Verify Your History with git log
+Run your single-line log command:
+
+git log --oneline
+What does Git output?
+You will now see two snapshots in your timeline, with the newest one at the top:
+
+
+a1b2c3d (HEAD -> main) feat: Add resource group creation to deployment script
+4a8b12c Initial commit: Add Azure deployment script
+
+
+git diff --- Working Directory vs Staging area
+git diff --staged --- Working Area vs Local Repository
