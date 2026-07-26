@@ -247,3 +247,41 @@ Learned the 3 Git areas: Working Directory, Staging Area, and Local Repository.
 Created a file, staged it with git add, and created your very first commit with git commit -m.
 
 
+
+
+
+
+
+
+
+
+------------------------------------ DAY 2 -----------------------------------------------------
+
+Before you stage or commit any changes in real DevOps projects, you should always inspect exactly what lines were added, removed, or changed. This prevents accidental hardcoded passwords, typos, or broken logic from sneaking into your commits.
+
+Hands-on Step 3: Run git diff
+In your VS Code terminal, run this command:
+
+git diff
+What does Git output?
+You will see something very similar to this:
+
+Diff
+diff --git a/deploy.sh b/deploy.sh
+index 1234567..89abcde 100644
+--- a/deploy.sh
++++ b/deploy.sh
+@@ -1 +1,2 @@
+ echo "Deploying Azure Infrastructure..."
++echo "Creating Resource Group: rg-production-eastus"
+How to read a git diff:
+--- a/deploy.sh (Old version): What the file looked like at your last commit.
+
++++ b/deploy.sh (New version): What the file looks like right now in your Working Directory.
+
++ (Green text with plus sign): Lines that were added.
+
+- (Red text with minus sign): Lines that were deleted (if any).
+
+Real-World DevOps Context
+Imagine an engineer changes a subnet IP range or an Azure VM size in a script. Running git diff before committing lets you catch high-risk edits instantly before they ever touch production.
