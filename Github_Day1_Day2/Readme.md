@@ -463,3 +463,38 @@ Type y (yes) if you want to discard a change.
 Type n (no) if you want to keep a change.
 
 If Git groups all lines into one chunk, type e (edit). Git will open a text prompt where you can delete the + from the line you want to keep, or keep the + on the line you want discarded!
+
+
+1. Comparing Two Specific Commits (git diff)
+If you want to compare your current state (or a recent commit) against a previous commit, you pass the commit hashes to git diff:
+
+git diff <old-commit-hash> <new-commit-hash>
+Example:
+Run git log --oneline to get your commit history:
+
+c3d4e5f (HEAD -> main) chore: Add .gitignore
+a1b2c3d feat: Add resource group creation
+4a8b12c Initial commit
+If you want to see every single change made between your initial commit (4a8b12c) and your latest commit (c3d4e5f), run:
+
+git diff 4a8b12c c3d4e5f
+2. Inspecting a Single Past Commit (git show)
+If you want to inspect a commit that was already made to see who made it, when, the message, and exact line changes included in that single snapshot:
+
+git show <commit-hash>
+Example:
+git show a1b2c3d
+This opens up the full patch for that exact commit so you can review what was added or removed in that snapshot.
+
+To inspect just your latest commit without typing the hash:
+
+git show HEAD
+3. Checking What Will Be Pushed to Remote (git log origin/main..HEAD)
+Once you start working with GitHub, you'll often ask: "I made 3 local commits... what changes am I about to push to the cloud?"
+
+To preview all commits sitting on your local machine that haven't reached the remote repository yet:
+
+git log origin/main..HEAD --oneline
+To see the actual line-by-line diff of what is going to be pushed:
+
+git diff origin/main..HEAD
