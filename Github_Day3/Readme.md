@@ -151,3 +151,23 @@ Expected output: Your branch is up to date with 'origin/main'. Nothing to commit
 Go to [https://github.com/](https://github.com/)<YOUR-USERNAME>/azure-devops-lab. Refresh the page.
 
 You should see your files (deploy.sh, .gitignore, Readme.md), your commit messages, and total commit count!
+
+
+Bonus Scenario: Suppose I commit something already. And again I need to make some changes. I changed it. Can I add that to the same commit?
+
+Yes definitely you can:
+
+Step 1: Make your changes in VS Code
+Edit your file (for example, deploy.sh) and save it (Ctrl + S).
+
+Step 2: Stage the new changes
+Put the new edits into the Staging Area just like you normally would:
+
+git add deploy.sh
+Step 3: Amend your last commit
+Instead of running a normal git commit, run:
+
+git commit --amend --no-edit
+--amend: Tells Git to take whatever is currently in your Staging Area and combine it directly into your most recent commit, replacing it with a single, updated commit snapshot.
+
+--no-edit: Tells Git to keep your previous commit message so you don't have to retype it. (If you do want to change the message, just run git commit --amend without --no-edit).
