@@ -436,3 +436,30 @@ The Result:
 Look at deploy.sh in VS Code! It now only contains your very first line (echo "Deploying Azure Infrastructure..."). The resource group line is gone because Git pulled that exact file state straight out of commit 4a8b12c!
 
 (Run git restore deploy.sh to put it back to normal when you're done testing).
+
+Scenario 2: Restoring Specific Lines Interactively (-p)
+Now imagine you made two separate line edits in deploy.sh, but you only want to throw away one of them and keep the other.
+
+Step 1: Make two separate edits
+Open deploy.sh and add two new lines:
+
+Bash
+echo "Deploying Azure Infrastructure..."
+echo "Creating Resource Group: rg-production-eastus"
+echo "Good Edit: Setting up Virtual Network"
+echo "Bad Edit: Temporary test code"
+Save the file (Ctrl + S).
+
+Step 2: Run git restore -p deploy.sh
+
+git restore -p deploy.sh
+What Git does:
+Git opens an interactive prompt at the bottom of your terminal showing your changes in green and asks:
+
+Plaintext
+Discard this hunk from worktree [y,n,q,a,d,e,?]?
+Type y (yes) if you want to discard a change.
+
+Type n (no) if you want to keep a change.
+
+If Git groups all lines into one chunk, type e (edit). Git will open a text prompt where you can delete the + from the line you want to keep, or keep the + on the line you want discarded!
