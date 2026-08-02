@@ -375,3 +375,39 @@ Now unstage it using the --staged flag:
 git restore --staged deploy.sh
 What Happened?
 Run git status again. Notice the file is now back in red (Changes not staged for commit). Your edits were not deleted—the file was simply moved back from the Staging Area to your Working Directory!
+
+
+Day 2, Part 5: Ignoring Files with .gitignore
+There is one final crucial concept every DevOps engineer uses on Day 2: .gitignore.
+
+In real projects, your directory will fill up with temporary files you never want inside Git—like secrets, API keys, passwords, build logs, OS junk files (.DS_Store, desktop.ini), or terraform state files containing sensitive data.
+
+Instead of accidentally committing them, we list them in a special file named .gitignore.
+
+Hands-on Step 4: Create and Test .gitignore
+In your VS Code terminal, let's pretend a log file and a secret file got generated in your folder:
+
+
+touch app.log secret.env
+(If on Windows PowerShell, you can use New-Item app.log, secret.env or just create them via VS Code UI).
+
+Run git status. You will see app.log and secret.env listed in red under Untracked files.
+
+Now, create a new file in your root folder named exactly .gitignore (notice the leading dot!).
+
+Inside .gitignore, type these two patterns:
+
+*.log
+*.env
+Save .gitignore (Ctrl + S / Cmd + S).
+
+Now run git status again!
+
+What Changed?
+app.log and secret.env have completely vanished from git status! Git is now instructed to ignore those files forever. The only untracked file left in red is .gitignore itself.
+
+Let's stage and commit .gitignore so your project keeps these rules permanently:
+
+
+git add .gitignore
+git commit -m "chore: Add .gitignore to exclude logs and env files"
