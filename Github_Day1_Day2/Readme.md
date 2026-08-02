@@ -411,5 +411,3 @@ Let's stage and commit .gitignore so your project keeps these rules permanently:
 
 git add .gitignore
 git commit -m "chore: Add .gitignore to exclude logs and env files"
-
-"Test Restore"
