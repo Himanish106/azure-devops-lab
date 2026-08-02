@@ -411,3 +411,28 @@ Let's stage and commit .gitignore so your project keeps these rules permanently:
 
 git add .gitignore
 git commit -m "chore: Add .gitignore to exclude logs and env files"
+
+
+Lets see now about git restore
+
+Scenario 1: Restoring a File to a Specific Past Commit (--source)
+Imagine you modified deploy.sh today, but you want to grab the exact version of deploy.sh from your very first commit (Initial commit).
+
+Step 1: Find your past commit ID
+Run your single-line log command:
+
+git log --oneline
+You'll see something like this:
+
+c3d4e5f (HEAD -> main) chore: Add .gitignore to exclude logs and env files
+a1b2c3d feat: Add resource group creation to deployment script
+4a8b12c Initial commit: Add Azure deployment script
+
+Step 2: Restore deploy.sh to that first commit (4a8b12c)
+Now, tell Git to bring deploy.sh back to how it looked in commit 4a8b12c:
+
+git restore --source=4a8b12c deploy.sh
+The Result:
+Look at deploy.sh in VS Code! It now only contains your very first line (echo "Deploying Azure Infrastructure..."). The resource group line is gone because Git pulled that exact file state straight out of commit 4a8b12c!
+
+(Run git restore deploy.sh to put it back to normal when you're done testing).
