@@ -79,3 +79,35 @@ git commit -m "feat: Add virtual network creation script"
 Push the updated dev branch to GitHub:
 
 git push
+
+
+
+
+
+
+Step 5: Merge dev into main (Production Release)
+Now that your script changes on dev are complete and tested, it's time to promote them into production (main).
+
+1. Switch back to main:
+git switch main
+(If you inspect deploy.sh in VS Code right now, notice the 3rd line disappears! That's because main doesn't have the new code yet).
+
+2. Merge dev into main:
+git merge dev
+Expected Output:
+Updating a1b2c3d..e4f5g6h
+Fast-forward
+ deploy.sh | 1 +
+ 1 file changed, 1 insertion(+)
+(Look at deploy.sh in VS Code now—the 3rd line is back! main now has all the updates from dev).
+
+3. Push the updated main to GitHub:
+git push
+Step 6: Verify Branch Synchronization
+Run git log on both branches or inspect status to ensure main and dev are at the exact same commit:
+
+git status
+Expected Output:
+On branch main
+Your branch is up to date with 'origin/main'.
+nothing to commit, working tree clean
