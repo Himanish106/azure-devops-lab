@@ -111,3 +111,38 @@ Expected Output:
 On branch main
 Your branch is up to date with 'origin/main'.
 nothing to commit, working tree clean
+
+
+When you run git merge dev while standing on main, you do not need to run git add or git commit manually for a very specific reason: git merge creates the commit for you automatically!
+
+Here is exactly why that happens and how Git processes the merge behind the scenes:
+
+Why git add and git commit Weren't Needed
+The changes were ALREADY committed on dev:
+
+Before switching to main, you already ran git add and git commit on the dev branch.
+
+That code was already saved into Git's object database as a completed snapshot.
+
+git merge performs a Fast-Forward or Merge Commit:
+
+When you run git merge dev, Git looks at the commits sitting on dev and applies them directly to main.
+
+Because there were no conflicting edits on main, Git performs a Fast-Forward merge. It simply moves the main pointer forward to match dev and automatically registers the commit.
+
+The Only Exception: Merge Conflicts
+The only time you will need to run git add and git commit after a merge is when there is a merge conflict (e.g., both main and dev edited the exact same line in different ways).
+
+In that scenario:
+
+git merge dev pauses and asks you to resolve the conflict in VS Code.
+
+You manually fix the code.
+
+You run git add <file> to mark the conflict as resolved.
+
+You run git commit to finalize the merge.
+
+Since your merge was clean, Git handled staging and committing automatically!
+
+Now that dev and main are merged locally, the final step for this workflow is pushing main up to GitHub (git push). Reply "done" once you've pushed, and we will move to handling Merge Conflicts!
