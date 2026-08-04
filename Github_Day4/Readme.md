@@ -146,3 +146,110 @@ You run git commit to finalize the merge.
 Since your merge was clean, Git handled staging and committing automatically!
 
 Now that dev and main are merged locally, the final step for this workflow is pushing main up to GitHub (git push). Reply "done" once you've pushed, and we will move to handling Merge Conflicts!
+
+
+
+
+
+Day 4, Part 2: Understanding and Resolving Merge Conflicts
+A merge conflict happens when Git cannot automatically merge two branches because the exact same line in the exact same file was modified differently on both branches.
+
+Git stops the merge, flags the file, and asks you (the human engineer) to decide which code stays and which code goes.
+
+Hands-on Scenario: Simulating a Merge Conflict
+We are going to intentionally create a conflict between main and dev on line 3 of deploy.sh.
+
+Step 1: Make a change on main (Production Edit)
+Make sure you are on main:
+
+git switch main
+Open deploy.sh in VS Code.
+
+Edit the 3rd line to read:
+
+echo "Deploying Azure Infrastructure..."
+echo "Creating Resource Group: rg-production-eastus"
+echo "Creating Virtual Network: vnet-MAIN-PROD-eastus"
+Save, stage, commit, and push on main:
+
+git add deploy.sh
+git commit -m "fix: Update VNet name on main for production"
+git push
+Step 2: Make a DIFFERENT change on dev (Dev Edit)
+Switch to dev:
+
+git switch dev
+Open deploy.sh in VS Code.
+
+Edit the 3rd line to read something different:
+
+echo "Deploying Azure Infrastructure..."
+echo "Creating Resource Group: rg-production-eastus"
+echo "Creating Virtual Network: vnet-DEV-TESTING-eastus"
+Save, stage, commit, and push on dev:
+
+git add deploy.sh
+git commit -m "feat: Update VNet name on dev for testing"
+git push
+At this point, main and dev have diverged! Both branches modified line 3 in different ways.
+
+Step 3: Trigger the Merge Conflict
+Now, switch back to main and try to merge dev into main:
+
+git switch main
+git merge dev
+The Output You Will See:
+
+Auto-merging deploy.sh
+CONFLICT (content): Merge conflict in deploy.sh
+Automatic merge failed; fix conflicts and then commit the result.
+
+Step 4: Resolving the Conflict in VS Code
+Look at deploy.sh in VS Code. VS Code highlights the conflicting section in color with conflict markers:
+
+<<<<<<< HEAD (Current Change)
+echo "Creating Virtual Network: vnet-MAIN-PROD-eastus"
+=======
+echo "Creating Virtual Network: vnet-DEV-TESTING-eastus"
+>>>>>>> dev (Incoming Change)
+<<<<<<< HEAD (Current Change): Code currently on main.
+
+=======: The divider line.
+
+>>>>>>> dev (Incoming Change): Code coming from dev.
+
+Above the lines, VS Code provides interactive action buttons:
+
+Accept Current Change (Keeps main line)
+
+Accept Incoming Change (Keeps dev line)
+
+Accept Both Changes (Keeps both lines)
+
+Compare Changes
+
+Click Accept Incoming Change (or manually delete the Git markers <<<<<<<, =======, >>>>>>> and leave the exact line you want).
+
+Step 5: Finalizing the Merge
+Once you resolved the file:
+
+Check status:
+
+git status
+(You will see both modified: deploy.sh under Unmerged paths).
+
+Stage the resolved file to mark the conflict as fixed:
+
+git add deploy.sh
+Commit the merge resolution:
+
+git commit -m "fix: Resolve merge conflict for VNet naming between main and dev"
+Push the final merge commit to GitHub:
+
+git push
+
+
+Aborting a Merge Conflict (Emergency Exit Command)
+If you ever trigger a merge conflict and feel lost, you can cancel the merge completely and return your branch to how it was before running git merge:
+
+git merge --abort
