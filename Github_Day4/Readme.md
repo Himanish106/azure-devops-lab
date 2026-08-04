@@ -265,3 +265,5 @@ Merge branch into active branch                         git merge <source-branch
 Cancel an ongoing conflict merge                        git merge --abort
 Delete merged branch locally                            git branch -d <branch-name>
 Force delete unmerged branch                            git branch -D <branch-name>
+
+![alt text](image.png)
