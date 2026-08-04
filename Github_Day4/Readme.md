@@ -253,3 +253,15 @@ Aborting a Merge Conflict (Emergency Exit Command)
 If you ever trigger a merge conflict and feel lost, you can cancel the merge completely and return your branch to how it was before running git merge:
 
 git merge --abort
+
+
+
+
+Task                                                           Command
+Switch to existing branch                               git switch <branch-name>
+Create and switch to new branch                         git switch -c <branch-name>
+List all branches (Local + Remote)                      git branch -a
+Merge branch into active branch                         git merge <source-branch>
+Cancel an ongoing conflict merge                        git merge --abort
+Delete merged branch locally                            git branch -d <branch-name>
+Force delete unmerged branch                            git branch -D <branch-name>
