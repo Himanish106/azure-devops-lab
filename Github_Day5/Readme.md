@@ -21,3 +21,39 @@ Local Machine:    [main] <──(git pull)── GitHub: [origin/main]
 
 
 Part 2: Hands-on: Create and Merge a Pull Request
+
+Step 1: Make a New Update on devSwitch to your dev branch: git switch dev
+
+Open deploy.sh in VS Code and add a line for Azure Subnet configuration:
+
+echo "Deploying Azure Infrastructure..."
+echo "Creating Resource Group: rg-production-eastus"
+echo "Creating Virtual Network: vnet-DEV-TESTING-eastus"
+echo "Creating Subnet: snet-app-eastus"
+
+Save the file (Ctrl + S), stage, commit, and push to GitHub:
+
+git add deploy.sh
+git commit -m "feat: Add subnet creation to deploy script"
+git push origin dev
+
+Step 2: Open the Pull Request on GitHub
+
+Open your browser and go to your repository on GitHub.You will see a yellow banner:
+dev had recent pushes... Compare & pull request. Click that button.
+(If you don't see the banner, go to the Pull requests tab ----> click New pull request).
+
+Set the branch targets:
+
+base: main (the destination where code will go)
+compare: dev (the source containing your new changes)
+Title: feat: Add subnet deployment configuration
+Description: Adds application subnet definition to deploy.sh for Azure infrastructure rollout.
+
+Click Create pull request.
+
+Step 3: Inspect Diff and Merge the PRIn the PR view, click on the Files changed tab at the top.
+
+Notice how GitHub highlights the new green line (+ echo "Creating Subnet: snet-app-eastus").
+
+Go back to the Conversation tab.Click the green button Merge pull request ----> Confirm merge.Now main on GitHub has your new subnet code, but your local laptop's main branch does not have it yet.
