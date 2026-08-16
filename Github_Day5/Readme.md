@@ -100,3 +100,57 @@ Fast-forward
  1 file changed, 1 insertion(+)
 Check deploy.sh in VS Code—it now contains the snet-app-eastus line!
 
+
+
+There are three critical rulesets and governance features that you should know how to configure:
+
+1. Implementing CODEOWNERS
+
+In enterprise teams, certain files (like cloud infrastructure scripts, security policies, or pipeline YAML files) should never be merged without the explicit approval from the domain lead. Github automates this using a special file called CODEOWNERS.
+
+STEP 1: Create the .github Directory and CODEOWNERS File
+Make sure you are working on your dev branch in your VS Code terminal:
+
+git switch dev
+
+a. Create a directory named .github at the root of your project
+
+mkdir .github
+
+b. Create an empty file named CODEOWNERS (no file extension) inside .github:
+
+
+STEP 2: Add Ownership Rules
+
+Open .github/CODEOWNERS in VS code and paste the following configurations:
+
+# Catch-all: By default, assign Himanish106 to review everything in the repo
+* @Himanish106
+
+# Specifically assign Himanish106 for any shell deployment scripts
+*.sh @Himanish106
+
+# Specifically assign Himanish106 for any changes to GitHub configurations/workflows
+/.github/ @Himanish106
+
+
+
+STEP 3: Stage, Commit, and Push to devCheck your status to verify the new file is tracked:
+
+git status
+
+Stage the new file:git add .github/CODEOWNERS
+
+Commit the change:git commit -m "chore: 
+
+Add CODEOWNERS file for PR review automation"
+Push to your remote dev branch:git push origin dev
+
+Step 4: Promote to main via Pull RequestTo make these rules take effect for the default branch:
+
+Go to your repository on GitHub.Open a Pull Request (base: main ----> compare: dev).
+Title: chore: Configure CODEOWNERS governance
+Click Create pull request and merge it into main.
+Switch back to your terminal, checkout main, and pull down the merge:
+git switch main
+git pull origin main
