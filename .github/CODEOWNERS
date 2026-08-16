@@ -1,0 +1,8 @@
+# Catch-all: By default, assign Himanish106 to review everything in the repo
+* @Himanish106
+
+# Specifically assign Himanish106 for any shell deployment scripts
+*.sh @Himanish106
+
+# Specifically assign Himanish106 for any changes to GitHub configurations/workflows
+/.github/ @Himanish106
