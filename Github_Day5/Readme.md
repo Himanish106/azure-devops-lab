@@ -154,3 +154,38 @@ Click Create pull request and merge it into main.
 Switch back to your terminal, checkout main, and pull down the merge:
 git switch main
 git pull origin main
+
+
+
+2. Enabling Secret Scanning Push Protection:
+
+DevOps engineers frequently handle Azure connection strings, service principal keys, and client secrets. Accidental commits of credentials can cause severe security breaches.
+
+How to Enable It:
+
+a. Go to your repository on GitHub ----> Settings.
+b. In the left sidebar, click Code security and analysis (under Security).
+c. Look for Secret scanning and click Enable.
+d. Right below it, check the box to enable Push protection.
+
+What Happens in Practice:
+If you or anyone on your team attempts to run git push containing an Azure Subscription ID key, AWS secret, or GitHub PAT, Git will abort the push right in your terminal with a security block message before the commit ever reaches the remote server.
+
+
+
+Intentionally Trigger a Blocked Push
+
+In VS Code, make sure you are on dev:
+
+git switch dev
+Open deploy.sh and add a dummy GitHub Personal Access Token format string at the bottom:
+
+# Test Secret
+DUMMY_TOKEN="ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+Save the file, stage, and commit it:
+
+git add deploy.sh
+git commit -m "test: Add dummy API token for secret scan test"
+Attempt to push:
+
+git push origin dev
