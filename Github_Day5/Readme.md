@@ -189,3 +189,22 @@ git commit -m "test: Add dummy API token for secret scan test"
 Attempt to push:
 
 git push origin dev
+
+
+
+
+Step 3: Enable "Require Conversation Resolution"
+
+To finish the second hands-on setting:
+
+a) On GitHub, go to your repository Settings ----> Rules ----> Rulesets (or Branches).
+
+b) Click on your Protect Main ruleset (or create one targeting main).
+
+c) Under Branch rules / Pull request rules, check:Require conversation resolution before merging
+
+Click Save changes.
+
+If an interviewer or senior engineer asks about PR quality gates, you only need to say:
+
+"We enforce Conversation Resolution on our protected main branch ruleset so no pull request can be merged until all review comments and questions are resolved."
