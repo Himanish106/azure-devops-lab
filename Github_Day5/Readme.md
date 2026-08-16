@@ -57,3 +57,12 @@ Step 3: Inspect Diff and Merge the PRIn the PR view, click on the Files changed 
 Notice how GitHub highlights the new green line (+ echo "Creating Subnet: snet-app-eastus").
 
 Go back to the Conversation tab.Click the green button Merge pull request ----> Confirm merge.Now main on GitHub has your new subnet code, but your local laptop's main branch does not have it yet.
+
+
+
+Difference between git fetch and git pull:
+
+The core difference is that git fetch only downloads data from the remote repository without changing your local files, whereas git pull downloads the data and immediately merges it into your current working branch. Essentially, git pull is a shortcut command that performs a git fetch followed by a git merge.
+
+
+![alt text](image.png)
