@@ -66,3 +66,36 @@ The core difference is that git fetch only downloads data from the remote reposi
 
 
 ![alt text](image.png)
+
+
+Method 1: Safe Inspection with git fetch
+git fetch downloads all changes, branches, and commits from GitHub to your laptop without modifying any of your local files.
+
+git switch main
+Run git fetch:
+
+git fetch origin
+Inspect how many commits origin/main is ahead of your local main:
+
+
+git status
+
+Output:
+
+On branch main
+Your branch is behind 'origin/main' by 2 commits, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+To preview the exact lines GitHub has that your local machine doesn't:
+
+git diff main origin/main
+Method 2: Applying Changes with git pull
+Once you know the incoming changes are safe, update your local branch:
+
+git pull origin main
+Expected Output:
+
+Updating ...
+Fast-forward
+ deploy.sh | 1 +
+ 1 file changed, 1 insertion(+)
+Check deploy.sh in VS Code—it now contains the snet-app-eastus line!
