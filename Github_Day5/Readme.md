@@ -99,3 +99,4 @@ Fast-forward
  deploy.sh | 1 +
  1 file changed, 1 insertion(+)
 Check deploy.sh in VS Code—it now contains the snet-app-eastus line!
+
