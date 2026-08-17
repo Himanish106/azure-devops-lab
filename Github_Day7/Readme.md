@@ -106,3 +106,4 @@ Plaintext
       ▲
       └── [squash i7j8k9l] (melts up into a1b2c3d)
 At the end of the process, Git combines all the code changes from all three commits into one single commit and lets you write a single, clean commit message to replace all three.
+Imagine you are working on a feature and you make 5 small, messy commits. Before you merge that PR into main, you should squash those 5 commits into 1 single, clean commit titled feat: Add Azure Application Gateway.
