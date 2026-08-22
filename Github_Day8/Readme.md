@@ -48,3 +48,17 @@ Types of Tags:
 Lightweight Tag: A simple pointer to a commit.
 
 Annotated Tag (Enterprise Standard): Stores the author, date, and a release description message.
+
+Hands-on Step:
+Create an annotated release tag on main:
+
+git tag -a v1.0.0 -m "Release v1.0.0: Initial production baseline deployment"
+List your tags:
+
+git tag
+Inspect the release metadata:
+
+git show v1.0.0
+Push the tag to GitHub:
+
+git push origin v1.0.0
